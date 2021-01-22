@@ -32,5 +32,29 @@ def insert_sort(li):
                 break
 
 
+# 快速排序
+def partion(li, left, right):
+    temp_val = li[left]
+    while left < right:
+        while right > left and li[right] >= temp_val:
+            right = right - 1
+        li[left] = li[right]
+        while left < right and li[left] <= temp_val:
+            left = left + 1
+        li[right] = li[left]
+    li[left] = temp_val
+    return left
+
+    return -1
+
+
+def quick_sort(li, left, right):
+    if left < right:
+        mid = partion(li, left, right)
+        quick_sort(li, left, mid - 1)
+        quick_sort(li, mid + 1, right)
+
+
 li = [8, 9, 7, 6, 5, 4, 3, 2, 1]
-insert_sort(li)
+quick_sort(li, 0, len(li) - 1)
+print li
