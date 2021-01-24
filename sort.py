@@ -98,6 +98,35 @@ def heap_sort(li):
         shif_digui(li, 0, i - 1)
 
 
+# 归并排序
+def merge_arr(li, left, left_end, right, right_end):
+    temp_li = []
+    low = left
+    high = right_end
+    while left <= left_end and right <= right_end:
+        if li[left] <= li[right]:
+            temp_li.append(li[left])
+            left = left + 1
+        else:
+            temp_li.append(li[right])
+            right = right + 1
+    while left <= left_end:
+        temp_li.append(li[left])
+        left = left + 1
+    while right <= right_end:
+        temp_li.append(li[right])
+        right = right + 1
+    li[low:high + 1] = temp_li
+
+
+def merge_sort(li, left, right):
+    if left < right:
+        mid = (left + right) // 2
+        merge_sort(li, left, mid)
+        merge_sort(li, mid + 1, right)
+        merge_arr(li, left, mid, mid + 1, right)
+
+
 li = [8, 9, 7, 6, 5, 4, 3, 2, 1]
-heap_sort(li)
+merge_sort(li, 0, len(li) - 1)
 print li
